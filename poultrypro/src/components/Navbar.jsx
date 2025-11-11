@@ -39,7 +39,7 @@ function Navbar() {
   { name: "Reports & Analytics", path: "/features/reports", icon: <FaChartBar /> },
 ];
   return (
-    <div className="min-h-screen bg-white">
+    <div className=" ">
       <nav className="bg-gray-400 bg-opacity-80 shadow-md backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-screen-xl mx-auto flex items-center justify-between p-4">
           
@@ -103,10 +103,10 @@ function Navbar() {
                 <select 
                   value={role} 
                   onChange={(e) => setRole(e.target.value)}
-                  className="px-3 py-2 bg-white text-purple-900 border border-purple-300 rounded-md text-sm font-medium hover:border-green-300 focus:outline-none focus:ring-2 focus:ring-green-300 transition"
+                  className="px-3  text-gray-900 py-2 bg-white  border border-green-800 rounded-md text-sm font-medium hover:border-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 transition"
                 >
-                  <option value="farmer"> Farmer</option>
-                  <option value="seller"> Seller</option>
+                  <option value="farmer" className="text-green-900"> Farmer</option>
+                  <option value="seller" className="text-purple-900"> Seller</option>
                 </select>
               </li>
             )}
