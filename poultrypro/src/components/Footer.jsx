@@ -14,7 +14,7 @@ function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center space-x-2 mb-4">
               <div >
-                <img src="poultrypro\src\assets\images\weblogo.jpg" alt="logo" className="w-10 h-10 bg-green-600 rounded-full " />
+                <img src="/src/assets/images/logo.jpg" alt="logo" className="w-10 h-10 bg-green-600 rounded-full " />
               </div>
               <h3 className="text-2xl font-bold text-green-900">
                 Poultry-Pro
