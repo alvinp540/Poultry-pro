@@ -53,12 +53,12 @@ function Home() {
     { icon: <CheckCircle size={20} />, text: "Easy to use interface" }
   ];
 
-  const stats = [
-    { number: "500+", label: "Active Farms" },
-    { number: "50K+", label: "Chickens Managed" },
-    { number: "98%", label: "Satisfaction Rate" },
-    { number: "24/7", label: "Support Available" }
-  ];
+  // const stats = [
+  //   { number: "500+", label: "Active Farms" },
+  //   { number: "50K+", label: "Chickens Managed" },
+  //   { number: "98%", label: "Satisfaction Rate" },
+  //   { number: "24/7", label: "Support Available" }
+  // ];
 
   return (
     <div className="bg-white">
@@ -111,8 +111,8 @@ function Home() {
 
             {/* Right Image/Illustration */}
             <div className="relative hidden md:block">
-              <div className="bg-gradient-to-br from-purple-200 to-blue-200 rounded-full w-96 h-96 flex items-center justify-center text-9xl shadow-2xl">
-               <img src="poultrypro/src/assets/images/weblogo.jpg" alt="chicken" />
+              <div className="bg-gradient-to-br from-green-200 to-green-600  w-96 h-96 flex items-center justify-center text-9xl shadow-2xl">
+               <img src="/src/assets/images/hero2.jpg" alt="chicken" className="w-90 h-90 "/>
               </div>
               
             </div>
