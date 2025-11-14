@@ -53,29 +53,22 @@ function Home() {
     { icon: <CheckCircle size={20} />, text: "Easy to use interface" }
   ];
 
-  // const stats = [
-  //   { number: "500+", label: "Active Farms" },
-  //   { number: "50K+", label: "Chickens Managed" },
-  //   { number: "98%", label: "Satisfaction Rate" },
-  //   { number: "24/7", label: "Support Available" }
-  // ];
-
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-purple-50 via-white to-blue-50 py-20 px-6 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-yellow-50 via-red-50 to-yellow-50 py-20 px-6 overflow-hidden border-b-4 border-red-600">
         <div className="max-w-screen-xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
             <div className="space-y-6">
-              <div className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full text-sm font-semibold">
+              <div className="inline-block bg-yellow-300 text-red-700 px-4 py-2 rounded-full text-sm font-bold">
                 Smart Poultry Management
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-bold text-red-700 leading-tight">
                 Manage Your Poultry Farm with
-                <span className="text-green-600"> Confidence</span>
+                <span className="text-yellow-600"> Confidence</span>
               </h1>
-              <p className="text-lg text-gray-900 leading-relaxed">
+              <p className="text-lg text-red-600 font-semibold leading-relaxed">
                 Poultry-Pro is your all-in-one platform for efficient poultry farm management. 
                 Track production, manage inventory, connect with buyers, and grow your business with data-driven insights.
               </p>
@@ -83,8 +76,8 @@ function Home() {
               {/* Benefits List */}
               <div className="grid grid-cols-2 gap-3">
                 {benefits.map((benefit, index) => (
-                  <div key={index} className="flex items-center space-x-2 text-gray-700">
-                    <span className="text-green-700">{benefit.icon}</span>
+                  <div key={index} className="flex items-center space-x-2 text-red-700 font-semibold">
+                    <span className="text-red-600">{benefit.icon}</span>
                     <span className="text-sm">{benefit.text}</span>
                   </div>
                 ))}
@@ -94,41 +87,37 @@ function Home() {
               <div className="flex flex-wrap gap-4 pt-4">
                 <a
                   href="/register"
-                  className="bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-400 transition font-semibold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  className="bg-red-600 text-white px-8 py-3 rounded-lg hover:bg-red-700 transition font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
                   Get Started Free
                 </a>
                 <a
                   href="/login"
-                  className="border-2 border-green-600 text-green-600 px-8 py-3 rounded-lg hover:bg-green-400 transition font-semibold"
+                  className="border-2 border-red-600 text-red-600 px-8 py-3 rounded-lg hover:bg-yellow-300 hover:border-yellow-300 transition font-bold"
                 >
                   Login
                 </a>
               </div>
-
-             
             </div>
 
             {/* Right Image/Illustration */}
             <div className="relative hidden md:block">
-              <div className="bg-gradient-to-br from-green-200 to-green-600  w-96 h-96 flex items-center justify-center text-9xl shadow-2xl">
-               <img src="/src/assets/images/hero2.jpg" alt="chicken" className="w-90 h-90 "/>
+              <div className="bg-gradient-to-br from-yellow-200 to-red-600 w-96 h-96 flex items-center justify-center text-9xl shadow-2xl rounded-lg">
+                <img src="/src/assets/images/hero2.jpg" alt="chicken" className="w-90 h-90 rounded-lg"/>
               </div>
-              
             </div>
           </div>
         </div>
       </section>
 
-    
       {/* Features Section */}
-      <section className="py-20 px-6 bg-gray-50">
+      <section className="py-20 px-6 bg-yellow-50">
         <div className="max-w-screen-xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl font-bold text-red-700 mb-4">
               Everything You Need to Succeed
             </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-red-600 font-semibold max-w-2xl mx-auto">
               Powerful features designed specifically for poultry farmers to streamline operations and maximize profits
             </p>
           </div>
@@ -137,15 +126,15 @@ function Home() {
             {features.map((feature, index) => (
               <div 
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border border-gray-100 hover:border-purple-200 group"
+                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-xl transition border-2 border-yellow-300 hover:border-red-500 group"
               >
-                <div className="text-green-600 mb-4 group-hover:scale-110 transition">
+                <div className="text-red-600 mb-4 group-hover:scale-110 transition">
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-bold text-red-700 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-red-600 font-semibold">
                   {feature.description}
                 </p>
               </div>
@@ -153,10 +142,6 @@ function Home() {
           </div>
         </div>
       </section>
-
-     
-
-  
     </div>
   );
 }

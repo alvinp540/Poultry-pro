@@ -1,16 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, CheckCircle, Clock, User, Calendar, Trash2, Edit2 } from 'lucide-react';
 
 export default function TaskManagement() {
- // declare default state of task
-    const [tasks, setTasks] = useState([
-    { id: 1, title: 'Feed chickens - Morning', assignee: 'John Doe', priority: 'high', status: 'pending', dueDate: '2025-11-11', category: 'Feeding' },
-   ]);
+  const [tasks, setTasks] = useState([
+    { id: 1, title: 'Feed chickens - Morning', assignee: 'John Doe', priority: 'high', status: 'pending', dueDate: '2025-11-11', category: 'Feeding', description: '' },
+    { id: 2, title: 'Clean coops', assignee: 'Jane Smith', priority: 'medium', status: 'in-progress', dueDate: '2025-11-11', category: 'Maintenance', description: '' },
+    { id: 3, title: 'Collect eggs', assignee: 'John Doe', priority: 'high', status: 'completed', dueDate: '2025-11-11', category: 'Production', description: '' },
+    { id: 4, title: 'Vaccination schedule', assignee: 'Dr. Brown', priority: 'high', status: 'pending', dueDate: '2025-11-12', category: 'Health', description: '' }
+  ]);
 
   const [showAddForm, setShowAddForm] = useState(false);
   const [newTask, setNewTask] = useState({
-    title: '', assignee: '', priority: 'medium', status: 'pending', dueDate: '', category: 'Feeding'
+    title: '', assignee: '', priority: 'medium', status: 'pending', dueDate: '', category: 'Feeding', description: ''
   });
+
+  // Set up listener for vaccination tasks from Livestock Management
+  useEffect(() => {
+    window.addTaskFromVaccination = (taskData) => {
+      const newVaccinationTask = {
+        id: Date.now(),
+        title: taskData.title,
+        assignee: taskData.assignee,
+        priority: taskData.priority,
+        status: 'pending',
+        dueDate: taskData.dueDate,
+        category: taskData.category,
+        description: taskData.description || ''
+      };
+      setTasks(prevTasks => [newVaccinationTask, ...prevTasks]);
+      
+  // Show simple alert (reset to normal prompt)
+  alert(`✅ Task created: ${taskData.title}`);
+    };
+
+    return () => {
+      delete window.addTaskFromVaccination;
+    };
+  }, []);
 
   const addTask = () => {
     if (newTask.title && newTask.assignee && newTask.dueDate) {
@@ -21,7 +47,12 @@ export default function TaskManagement() {
   };
 
   const deleteTask = (id) => {
+    const taskToDelete = tasks.find(t => t.id === id);
+    const title = taskToDelete ? taskToDelete.title : 'this task';
+    const confirmed = window.confirm(`Are you sure you want to delete "${title}"? This action cannot be undone.`);
+    if (!confirmed) return;
     setTasks(tasks.filter(task => task.id !== id));
+    alert(`Deleted: ${title}`);
   };
 
   const toggleStatus = (id) => {
@@ -40,15 +71,15 @@ export default function TaskManagement() {
     switch(priority) {
       case 'high': return 'bg-red-100 text-red-700';
       case 'medium': return 'bg-yellow-100 text-yellow-700';
-      case 'low': return 'bg-green-100 text-green-700';
+      case 'low': return 'bg-yellow-100 text-yellow-700';
       default: return 'bg-gray-100 text-gray-700';
     }
   };
 
   const getStatusColor = (status) => {
     switch(status) {
-      case 'completed': return 'bg-green-100 text-green-700';
-      case 'in-progress': return 'bg-blue-100 text-blue-700';
+      case 'completed': return 'bg-yellow-100 text-yellow-700';
+      case 'in-progress': return 'bg-red-100 text-red-700';
       case 'pending': return 'bg-gray-100 text-gray-700';
       default: return 'bg-gray-100 text-gray-700';
     }
@@ -62,50 +93,50 @@ export default function TaskManagement() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-yellow-50 p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Task & Work Management</h1>
-          <p className="text-gray-600">Organize daily farm operations and track worker assignments</p>
+          <h1 className="text-3xl font-bold text-red-700 mb-2">Task & Work Management</h1>
+          <p className="text-red-600 font-semibold">Organize daily farm operations and track worker assignments</p>
         </div>
 
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-6 rounded-lg shadow border-l-4 border-red-500">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Total Tasks</p>
-                <p className="text-3xl font-bold text-gray-900">{taskStats.total}</p>
+                <p className="text-3xl font-bold text-red-700">{taskStats.total}</p>
               </div>
-              <Clock className="text-gray-400" size={32} />
+              <Clock className="text-red-400" size={32} />
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Completed</p>
-                <p className="text-3xl font-bold text-green-600">{taskStats.completed}</p>
+                <p className="text-3xl font-bold text-yellow-600">{taskStats.completed}</p>
               </div>
-              <CheckCircle className="text-green-400" size={32} />
+              <CheckCircle className="text-yellow-400" size={32} />
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-6 rounded-lg shadow border-l-4 border-red-600">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">In Progress</p>
-                <p className="text-3xl font-bold text-blue-600">{taskStats.inProgress}</p>
+                <p className="text-3xl font-bold text-red-600">{taskStats.inProgress}</p>
               </div>
-              <Clock className="text-blue-400" size={32} />
+              <Clock className="text-red-400" size={32} />
             </div>
           </div>
-          <div className="bg-white p-6 rounded-lg shadow">
+          <div className="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-600">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-gray-600 text-sm">Pending</p>
-                <p className="text-3xl font-bold text-gray-600">{taskStats.pending}</p>
+                <p className="text-3xl font-bold text-yellow-700">{taskStats.pending}</p>
               </div>
-              <Calendar className="text-gray-400" size={32} />
+              <Calendar className="text-yellow-400" size={32} />
             </div>
           </div>
         </div>
@@ -114,7 +145,7 @@ export default function TaskManagement() {
         <div className="mb-6">
           <button
             onClick={() => setShowAddForm(!showAddForm)}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition flex items-center gap-2"
+            className="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition flex items-center gap-2 shadow-md"
           >
             <Plus size={20} />
             Add New Task
@@ -123,8 +154,8 @@ export default function TaskManagement() {
 
         {/* Add Task Form */}
         {showAddForm && (
-          <div className="bg-white p-6 rounded-lg shadow mb-6">
-            <h3 className="text-xl font-bold mb-4">Create New Task</h3>
+          <div className="bg-yellow-50 p-6 rounded-lg shadow mb-6 border-l-4 border-red-500">
+            <h3 className="text-xl font-bold mb-4 text-red-700">Create New Task</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
                 type="text"
@@ -169,7 +200,7 @@ export default function TaskManagement() {
             <div className="flex gap-3 mt-4">
               <button
                 onClick={addTask}
-                className="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700"
+                className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700"
               >
                 Add Task
               </button>
